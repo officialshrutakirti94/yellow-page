@@ -3,18 +3,31 @@ const express= require ('express');
 const mongoose=require('mongoose')
 const detail=mongoose.model('details')
 const app=express();
+const multer=require('multer')
 const bodyParser=require('body-parser')
 app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static('public'))
+var upload_img=''
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, 'public/uploads');
+    },
+    filename: function(req, file, cb) {
+      upload_img=file.originalname;
+      cb(null, file.originalname);
+    }
+  });
+  const upload = multer({ storage: storage });
 app.get('/',(req,res)=>{
     res.render('home')
 })
 app.get('/add',(req,res)=>{
     res.render('yellopage',{msg:''})
 })
-app.post('/save',(req,res)=>{
+app.post('/save',upload.single('upload_img'),(req,res)=>{
     var details =new detail(req.body)
+    console.log(details)
     details.save()
     .then((result)=>{
         console.log('data fetched')

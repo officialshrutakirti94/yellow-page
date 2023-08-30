@@ -30,13 +30,17 @@
     </nav>
 </div>
 <div class="m-4">
-    <form action="/save" method="post">
+    <form action="/save" method="post" enctype="multipart/form-data">
         <div class="col-sm-5">
             <select class="form-select" name="selection">
                 <option>school</option>
                 <option>college</option>
                 <option>hospital</option>
                 <option>police station</option>
+                <option>web development</option>
+                <option>interior design</option>
+                <option>teaching</option>
+                <option>shopping mall</option>
             </select>
         </div>
         <div class="row mb-3">
@@ -60,6 +64,13 @@
             <div class="col-sm-5">
                 <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
             </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-5">
+                <input type="file" name="upload_img" id="">
+
+            </div>
+
         </div>
         <div class="row">
             <div class="col-sm-10 offset-sm-2">
